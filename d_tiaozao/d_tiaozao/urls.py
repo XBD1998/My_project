@@ -13,18 +13,23 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url,include
 from django.contrib import admin
 from app01 import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    # url(r'^base/$', views.base),
+    # url(r'^index/$', views.index),
+    # url(r'^goods_list/$', views.goods_list),
+    # url(r'^buy_history/$', views.buy_hostory),
+    # url(r'^goods_detail/$', views.goods_detail),
+    # url(r'^sale_history/$', views.sale_history),
+    # url(r'^user_issue/$', views.user_issue),
+    # url(r'^user_register/$', views.user_register),
+    url(r'^login/$', views.login),
+    url(r'^accounts/', include('apps.accounts.urls', namespace="accounts")),
+    url(r'^apis/', include('apps.apis.urls', namespace="apis")),
+    url(r'^uc/', include('apps.usercenter.urls', namespace="uc")),
+    url(r'^', include('apps.repo.urls', namespace="repo")),
     url(r'^base/$', views.base),
-    url(r'^index/$', views.index),
-    url(r'^goods_list/$', views.goods_list),
-    url(r'^buy_history/$', views.buy_hostory),
-    url(r'^goods_detail/$', views.goods_detail),
-    url(r'^sale_history/$', views.sale_history),
-    url(r'^user_issue/$', views.user_issue),
-    url(r'^user_register/$', views.user_register),
-    url(r'^login/$', views.login)
 ]
