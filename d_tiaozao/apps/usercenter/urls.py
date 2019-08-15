@@ -10,10 +10,4 @@ urlpatterns = [
         url(r'^answer/$', views.test, name='answer'),
         #我的收藏
         url(r'^collect/$', views.test, name='collect'),
-        #我的贡献
-        url(r'^contribut/$', views.test, name='contribut'),
-        #待审题目
-        url(r'^approval/$', views.test, name='approval'),
-        #审核题目
-        url(r'^approval/id/$', views.test, name='approval_pass'),
     ]
