@@ -7,13 +7,15 @@ from django.contrib import auth
 from django.http import JsonResponse
 import logging
 from .models import User
+from apps.goodsIssue.models import Goods
 logger = logging.getLogger('accounts')
 from django.views.generic import View
 from .forms import RegisterForm, LoginForm
 def test(request):
     return HttpResponse("视图")
-def Logout(request):
-    return render(request,'base.html')
+# def Logout(request):
+#     auth.logout(request)
+#     return render(request,'base.html')
 class Register(View):
     def get(self, request):
         form = RegisterForm()
@@ -95,7 +97,7 @@ class Login(View):
 
 def logout(request):
     auth.logout(request)
-    return redirect(reverse("accounts:login"))
+    return redirect(reverse("accounts:base"))
 
 
 def Base(request):
@@ -103,4 +105,5 @@ def Base(request):
 
 @login_required
 def Index(request):
-    return render(request,"index.html")
+    userlog = User.objects.all()[:10]
+    return render(request, "index.html")

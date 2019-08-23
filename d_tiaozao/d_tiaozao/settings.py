@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'apps.usercenter',
     'apps.apis',
     'easy_thumbnails',
+    'apps.goodsIssue',
+    'apps.trade'
 ]
 
 MIDDLEWARE = [
@@ -334,6 +336,13 @@ CKEDITOR_CONFIGS = {
             ]),
     }
 }
+
+#单位：px
+THUMB_SIZE = 70
+if not os.path.exists(MEDIA_ROOT):
+    os.mkdir(MEDIA_ROOT)
+#修改上传文件大小（Default:2621440(i.e.2.5 MB).）
+DATA_UPLOAD_MAX_MEMORY_SIZE = 2621440*10
 
 #配置缩略图（easy_thumbnails暂时生成不出来）
 THUMBNAIL_ALIASES = {

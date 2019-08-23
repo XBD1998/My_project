@@ -1,0 +1,283 @@
+{% load staticfiles %}
+{% load thumbnail %}
+{% block title %}首页{% endblock %}
+
+{% block content %}
+<aside class="profile-info col-lg-9">
+    <!--features carousel start-->
+    <section class="panel">
+          <div class="flat-carousal">
+              <div id="owl-demo" class="owl-carousel owl-theme" style="opacity: 1; display: block;">
+                  <div class="owl-wrapper-outer">
+                      <div class="owl-wrapper" style="width: 4926px; left: 0px; display: block;">
+                          <div class="owl-item active" style="width: 821px;">
+                              <div class="item">
+                                  <h1>通知广告1</h1>
+                                  <div class="text-center">
+                                      <a href="javascript:;" class="view-all">View All</a>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="owl-item" style="width: 821px;">
+                              <div class="item">
+                                  <h1>通知广告2</h1>
+                                  <div class="text-center">
+                                      <a href="javascript:;" class="view-all">View All</a>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="owl-item" style="width: 821px;">
+                              <div class="item">
+                                  <h1>通知广告3</h1>
+                                  <div class="text-center">
+                                      <a href="javascript:;" class="view-all">View All</a>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="owl-controls clickable">
+                      <div class="owl-pagination">
+                          <div class="owl-page active"><span class=""></span></div>
+                          <div class="owl-page"><span class=""></span></div>
+                          <div class="owl-page"><span class=""></span></div>
+                      </div>
+                      <div class="owl-buttons">
+                          <div class="owl-prev">prev</div>
+                          <div class="owl-next">next</div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+    </section>
+
+    <section class="panel">
+          <header class="panel-heading">
+              最新动态
+          </header>
+          <div class="panel-body">
+              <div class="timeline-messages">
+                  <!-- Comment -->
+                  {% for item in userlog %}
+                  <div class="msg-time-chat">
+                      <a href="#" class="message-img"><img class="avatar" src="{{ item.user.avator_sor.url }}" alt="图片不存在"></a>
+                      <div class="message-body {% if forloop.counter|divisibleby:2 %}msg-out{% else %}msg-in{% endif %}">
+                          <span class="arrow"></span>
+                          <div class="text">
+                              <p class="attribution"><a href="#">{{ item.goods_name.img }}</a></p>
+
+                              <p><a href="#">{{ item.goods_name.name }}</a></p>
+
+                              <p><a href="#">{{ item.goods_name.price }}</a></p>
+
+                          </div>
+                      </div>
+                  </div>
+                  {% endfor %}
+
+
+              </div>
+          </div>
+    </section>
+
+    <section class="panel">
+        <header class="panel-heading">
+          最近发布商品的卖家
+        </header>
+        <div class="panel-body">
+            {% for user in recent_user %}
+             <div class="task-thumb">
+                 <img src="{{ user.avator_sor.url }}" alt="图片不存在">
+                 <div class="clearfix"></div>
+                 <a href="#">{{ user.username }}</a>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    <!--custom chart end-->
+</aside>
+<aside class="profile-info col-lg-3">
+  <section class="panel">
+      <div class="follower">
+          <div class="panel-body">
+              <div class="follow-ava">
+                  <img src="{{ request.user.avator_sor.url }}" alt="图片不存在">
+              </div>
+              <h4>{{ request.user.username }}</h4>
+          </div>
+      </div>
+  </section>
+</aside>
+{% endblock %}
+
+
+
+
+{% load staticfiles %}
+{% load thumbnail %}
+<!DOCTYPE html>
+{#<html style="overflow:hidden;" lang="zh">#}
+<head lang="zh-CN" profile="http://gmpg.org/xfn/11">
+{% block meta %}
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'default/bootstrap/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'default/bootstrap/css/bootstrap-theme.min.css'%}">
+    <link rel="stylesheet" href="{% static 'default/css/style.css' %}" />
+    <script type="text/javascript" src="{% static 'default/js/jquery-1.11.2.min.js'%}"></script>
+    <script type="text/javascript" src="{% static 'default/bootstrap/js/bootstrap.min.js'%}"></script>
+    <script type="text/javascript" src="{% static 'default/js/bin.js'%}"></script>
+    <link rel="shortcut icon" href="{% static 'default/favicon.ico'%}">
+    <meta name="keywords" content="{{ keywords }}" />
+    <meta name="description" content="{{ desc }}" />
+{% endblock %}
+<title>跳蚤市场- {% block title %}{% endblock %}</title>
+</head>
+<body role="document">
+<!-- page head -->
+{% block head %}
+<!-- Fixed navbar -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">跳蚤市场</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">跳蚤市场</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class=""><a href="http://127.0.0.1:8000/base">首页</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">我的商品<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="http://127.0.0.1:8000/goodsIssue/issue">商品发布</a></li>
+            <li><a href="http://127.0.0.1:8000/trade/sale_history">销售记录</a></li>
+          </ul>
+        </li>
+          <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">我的购买<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="http://127.0.0.1:8000/trade/goods_list">商品浏览</a></li>
+              <li><a href="http://127.0.0.1:8000/trade/sale_history">购买记录</a></li>
+          </ul>
+          </li>
+          <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">交易消息<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+              <li><a href="http://127.0.0.1:8000/goodsIssue/issue">消息中心</a></li>
+          </ul>
+          </li>
+      </ul>
+        {% if request.session.islogin %}
+            <form class="navbar-form navbar-right">
+            <span style="color:#58c9f3">您好：{{ request.session.user_info.name }}</span>
+            <a class="btn btn-success" href="http://127.0.0.1:8000/accounts/logout/">退出</a>
+            </form>
+        {% else %}
+            <form class="navbar-form navbar-right"  method="post">
+                <input type="text" class="form-control search" placeholder="Search" name="search" id="search" value="{{ search_key }}">
+{#                <button type="submit" class="btn btn-success" href="http://127.0.0.1:8000/accounts/login">登录</button>#}
+                <a class="btn btn-success" href="http://127.0.0.1:8000/accounts/login">登录</a>
+                <a class="btn btn-success" href="http://127.0.0.1:8000/accounts/register">注册</a>
+            </form>
+        {% endif %}
+    </div>
+  </div>
+</nav>
+{% endblock %}
+
+<div class="container theme-showcase" role="main">
+
+    <!-- page body -->
+    {% block body %}
+        {{ now }}
+    <h1>商家商品列表</h1>
+        <img src="{% static 'images/1.jpg'%}" alt="图片不存在" height="100px">
+        <img src="{% static 'images/七龙珠.jpg'%}" alt="图片不存在" height="100px">
+        <img src="{% static 'images/悟空.jpg'%}" alt="图片不存在" height="100px">
+        <img src="{% static 'images/龙珠一.jpg'%}" alt="图片不存在" height="100px">
+        <img src="{% static 'images/龙珠二.jpg'%}" alt="图片不存在" height="100px"><br>
+        <img src="{% static 'images/p_3.jpg'%}" alt="图片不存在" height="200px">
+        <img src="{% static 'images/p_4.jpg'%}" alt="图片不存在" height="200px">
+        <img src="{% static 'images/p_5.jpg'%}" alt="图片不存在" height="200px">
+        <img src="{% static 'images/p_6.jpg'%}" alt="图片不存在" height="200px">
+        <img src="{% static 'images/p_7.jpg'%}" alt="图片不存在" height="200px">
+        <img src="{% static 'images/p_1.jpg'%}" alt="图片不存在" height="200px">
+        <img src="{% static 'images/p_2.jpg'%}" alt="图片不存在" height="200px">
+
+    {% endblock %}
+</div>
+{% block content %}
+    <section class="panel">
+          <header class="panel-heading">
+              最新动态
+          </header>
+          <div class="panel-body">
+              <div class="timeline-messages">
+                  {% for item in userlog %}
+                      <div class="msg-time-chat">
+                      <a href="#" class="message-img"><img class="avatar" src="{{ item.user.avator_sor.url }}" alt="图片不存在"></a>
+                      <div class="message-body {% if forloop.counter|divisibleby:2 %}msg-out{% else %}msg-in{% endif %}">
+                      <div class="row">
+                      <div class="col-sm-2 col-md-2">
+                        <div class="thumbnail">
+                          <img src="{{ item.goods_name.img }}" alt="图片不存在">
+                          <div class="caption">
+                            <h3>商品名称:{{ item.goods_name.name }}</h3>
+                            <p>价格：{{ item.goods_name.price }}￥</p>
+                            <p><a href="#" class="btn btn-primary" role="button">购买</a> <a href="#" class="btn btn-default" role="button">收藏</a></p>
+                              <h1>哈哈</h1>
+                          </div>
+                        </div>
+                      </div>
+                      </div>
+                  {% endfor %}
+              </div>
+          </div>
+    </section>
+{% endblock %}
+<div class="row">
+  <div class="col-sm-2 col-md-2">
+    <div class="thumbnail">
+      <img src="{% static 'images/beauty_1.jpg'%}" alt="图片不存在">
+      <div class="caption">
+        <h3>商品价格</h3>
+        <p>100￥</p>
+        <p><a href="#" class="btn btn-primary" role="button">购买</a> <a href="#" class="btn btn-default" role="button">收藏</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+{% for item in userlog %}
+  <div class="row">
+  <div class="col-sm-2 col-md-2">
+    <div class="thumbnail">
+      <img src="{{ item.goods_name.img }}" alt="图片不存在">
+      <div class="caption">
+        <h3>商品名称:{{ item.goods_name.name }}</h3>
+        <p>价格：{{ item.goods_name.price }}￥</p>
+        <p><a href="#" class="btn btn-primary" role="button">购买</a> <a href="#" class="btn btn-default" role="button">收藏</a></p>
+      </div>
+    </div>
+  </div>
+  </div>
+{% endfor %}
+
+{% block foot %}
+<footer id="footer" >
+    <hr>
+    <p align="middle">2019 &copy;  <a href="{{ web_url }}" >{{ web_name }}</a> Powered By Django
+	<br/>
+	Email:xiongbiao1998@foxmail.com
+    </p>
+</footer>
+{% endblock %}
+
+</body>
+</html>

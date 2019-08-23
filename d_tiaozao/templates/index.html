@@ -1,7 +1,6 @@
 {% load staticfiles %}
 {% load thumbnail %}
 <!DOCTYPE html>
-{#<html style="overflow:hidden;" lang="zh">#}
 <head lang="zh-CN" profile="http://gmpg.org/xfn/11">
 {% block meta %}
     <meta charset="UTF-8" />
@@ -18,55 +17,54 @@
     <meta name="description" content="{{ desc }}" />
 {% endblock %}
 <title>跳蚤市场- {% block title %}{% endblock %}</title>
+    {% block load_css %}
+    {% endblock %}
+    {% block load_js %}
+    {% endblock %}
 </head>
-<body role="document">
-<!-- page head -->
-{% block head %}
-<!-- Fixed navbar -->
 <nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-        <span class="sr-only">跳蚤市场</span>
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="#">跳蚤市场</a>
     </div>
-    <div id="navbar" class="navbar-collapse collapse">
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class=""><a href="http://127.0.0.1:8000/base">首页</a></li>
+        <li class="active"><a href="http://127.0.0.1:8000/accounts/index">首页<span class="sr-only"></span></a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">我的商品<span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">我的商品<span class="caret"></span></a>
+          <ul class="dropdown-menu">
             <li><a href="http://127.0.0.1:8000/goodsIssue/issue">商品发布</a></li>
             <li><a href="http://127.0.0.1:8000/trade/sale_history">销售记录</a></li>
           </ul>
         </li>
-          <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">我的购买<span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">我的购买<span class="caret"></span></a>
+          <ul class="dropdown-menu">
             <li><a href="http://127.0.0.1:8000/trade/goods_list">商品浏览</a></li>
-              <li><a href="http://127.0.0.1:8000/trade/sale_history">购买记录</a></li>
+            <li><a href="http://127.0.0.1:8000/trade/sale_history">购买记录</a></li>
           </ul>
-          </li>
-          <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">交易消息<span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-              <li><a href="/apps/goodsIssue/message">消息中心</a></li>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">交易消息<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="http://127.0.0.1:8000/goodsIssue/issue">消息中心</a></li>
           </ul>
-          </li>
+        </li>
       </ul>
         {% if request.session.islogin %}
             <form class="navbar-form navbar-right">
             <span style="color:#58c9f3">您好：{{ request.session.user_info.name }}</span>
-            <a class="btn btn-success" href="/login/logout">退出</a>
+            <a class="btn btn-success" href="http://127.0.0.1:8000/accounts/logout">退出</a>
             </form>
         {% else %}
             <form class="navbar-form navbar-right"  method="post">
-                <a>商品搜索</a>
-                <input type="text" class="form-control search" placeholder="Search" name="search" id="search" value="{{ search_key }}">
                 <a data-toggle="dropdown" class="dropdown-toggle" href="#" >
                       <img class="avatar" src="{{ user.avator_sor|thumbnail_url:'avatar'}}" alt="图片不存在" height="30px">
                       <span class="username">{{ user }}</span>
@@ -76,43 +74,71 @@
                               <div class="log-arrow-up"></div>
                               <li><a class="" href="http://127.0.0.1:8000/uc/profile/"> 个人资料 </a></li>
                               <li><a class="" href="http://127.0.0.1:8000/uc/change_passwd/"> 修改密码 </a></li>
-                              <li><a class="" href="http://127.0.0.1:8000/uc/answer/"> 我的回答 </a></li>
-                              <li><a class="" href="http://127.0.0.1:8000/uc/collect/"> 我的收藏 </a></li>
-                              <li><a class="" href="#myModal-1" data-toggle="modal"> 贡献题目 </a></li>
-                              <li><a class="" href="http://127.0.0.1:8000/uc/contribut/"> 我的贡献 </a></li>
                               <li><a class="" href="http://127.0.0.1:8000/accounts/logout/"> 退出 </a></li>
                 </ul>
+            </form>
+            <form class="navbar-form navbar-right">
+                <div class="form-group">
+                <input type="text" class="form-control search" placeholder="Search" name="search" id="search" value="{{ search_key }}">
+                </div>
+                <button type="submit" class="btn btn-default">搜索</button>
             </form>
         {% endif %}
     </div>
   </div>
 </nav>
-{% endblock %}
-
+{#<div class="jumbotron">#}
+{#  <h1>Hello, world!</h1>#}
+{#  <p>...</p>#}
+{#  <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>#}
+{#</div>#}
+{#<div class="row">#}
+{#  <div class="col-sm-2 col-md-2">#}
+{#    <div class="thumbnail">#}
+{#      <img src="{% static 'images/beauty_1.jpg'%}" alt="图片不存在">#}
+{#      <div class="caption">#}
+{#        <h3>商品价格</h3>#}
+{#        <p>100￥</p>#}
+{#        <p><a href="#" class="btn btn-primary" role="button">购买</a> <a href="#" class="btn btn-default" role="button">收藏</a></p>#}
+{#      </div>#}
+{#    </div>#}
+{#  </div>#}
+{#</div>#}
 <div class="container theme-showcase" role="main">
 
     <!-- page body -->
     {% block body %}
         {{ now }}
     <h1>商家商品列表</h1>
-        <img src="{% static 'images/1.jpg'%}" alt="图片不存在" height="100px">
-        <img src="{% static 'images/七龙珠.jpg'%}" alt="图片不存在" height="100px">
-        <img src="{% static 'images/悟空.jpg'%}" alt="图片不存在" height="100px">
-        <img src="{% static 'images/龙珠一.jpg'%}" alt="图片不存在" height="100px">
-        <img src="{% static 'images/龙珠二.jpg'%}" alt="图片不存在" height="100px"><br>
-        <img src="{% static 'images/p_3.jpg'%}" alt="图片不存在" height="200px">
-        <img src="{% static 'images/p_4.jpg'%}" alt="图片不存在" height="200px">
-        <img src="{% static 'images/p_5.jpg'%}" alt="图片不存在" height="200px">
-        <img src="{% static 'images/p_6.jpg'%}" alt="图片不存在" height="200px">
-        <img src="{% static 'images/p_7.jpg'%}" alt="图片不存在" height="200px">
-        <img src="{% static 'images/p_1.jpg'%}" alt="图片不存在" height="200px">
-        <img src="{% static 'images/p_2.jpg'%}" alt="图片不存在" height="200px">
 
     {% endblock %}
-
-</div><!-- main end -->
-
-<!-- page foot -->
+</div>
+{% for item in userlog %}
+<div class="jumbotron" style="background-image:url({% static 'images/b_4.jpg'%});">
+    <div class="container">
+        <div class="row">
+            <div>
+                <a href="#" class="message-img"><img class="avatar img-circle" src="{{ item.user.avator_sor.url }}" alt="图片不存在" height="30px"></a>
+                <p class="attribution">
+                    <a href="#">{{ item.user.username }}</a><br/>
+                    在{{ item.goods_name.ptime }}发布了商品：{{ item.goods_name.name }}
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6 col-md-3" style="background-color:#55f2e7;height:200px;width:500px;">
+                <img class="img-rounded" src="{{ item.goods_name.img.url }}" alt="图片不存在" height="200px">
+            </div>
+            <div class="col-xs-6 col-md-3" style="background-color:#55f2e7;height:200px;width:500px;">
+                <p>商品的名称：{{ item.goods_name.name }}</p>
+                <p>商品的描述：{{ item.goods_name.context }}</p>
+                <p>商品的价格：{{ item.goods_name.price }}</p>
+                <p><a href="#" class="btn btn-primary" role="button">购买</a> <a href="#" class="btn btn-default" role="button">收藏</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
 {% block foot %}
 <footer id="footer" >
     <hr>
@@ -123,5 +149,5 @@
 </footer>
 {% endblock %}
 
-</body>
-</html>
+
+

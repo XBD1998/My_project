@@ -10,4 +10,6 @@ urlpatterns = [
         url(r'^answer/$', views.test, name='answer'),
         #我的收藏
         url(r'^collect/$', views.test, name='collect'),
+        #接收的消息
+        url(r'^message/$', views.Message, name='message')
     ]

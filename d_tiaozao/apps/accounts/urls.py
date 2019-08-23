@@ -1,22 +1,23 @@
 from django.conf.urls import url,include
 from django.views.generic import TemplateView
 from . import views
+from apps.usercenter import views as uc_views
 #CBV => class base view
 #FBV => function base view
 urlpatterns = [
     #TemplateView可以不写视图函数
     # url(r'^register/$', TemplateView.as_view(template_name="accounts/register.html"), name="register"),
     #首页
-    url(r'^base/$', views.Base, name='base'),
+    url(r'^base/$', uc_views.index, name='base'),
     # 注册
     url(r'register/$', views.Register.as_view(), name="register"),
     # 登录
     url(r'^login/$', views.Login.as_view(), name='login'),
     # 首页
-    url(r'^index/$', views.Index, name='index'),
+    url(r'^index/$', uc_views.Index, name='index'),
     # url(r'login/$', views.test, name="login"),
     # 退出
-    url(r'logout/$', views.Logout, name="logout"),
+    url(r'logout/$', views.logout, name="logout"),
     # 忘记密码
     url(r'password/forget/$', views.test, name="password_forget"),
     # 重置密码
